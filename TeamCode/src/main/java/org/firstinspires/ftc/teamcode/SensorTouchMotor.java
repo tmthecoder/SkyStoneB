@@ -15,18 +15,18 @@ package org.firstinspires.ftc.teamcode;
 //@Disabled
 public class DriveCircleTouch extends LinearOpMode
 {
-    DcMotor     leftMotor;
-    DcMotor     rightMotor;
+    DcMotor     motorBackLeft;
+    DcMotor     motorBackRight;
     TouchSensor touch;
 
     // called when init button is  pressed.
     @Override
     public void runOpMode() throws InterruptedException
     {
-        leftMotor = hardwareMap.dcMotor.get("left_motor");
-        rightMotor = hardwareMap.dcMotor.get("right_motor");
+        motorBackLeft = hardwareMap.dcMotor.get("left_motor");
+        motorBackLeft = hardwareMap.dcMotor.get("right_motor");
 
-        leftMotor.setDirection(DcMotor.Direction.REVERSE);
+        motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
 
         touch = hardwareMap.touchSensor.get("touch_sensor");
 
@@ -44,8 +44,8 @@ public class DriveCircleTouch extends LinearOpMode
 
         // set power levels 75% left and 10% right to drive in an arc to the right.
 
-        leftMotor.setPower(0.75);
-        rightMotor.setPower(0.20);
+        motorBackLeft.setPower(0.75);
+        motorBackRight.setPower(0.10);
 
         resetStartTime();
         // drive until touch sensor button pressed or 5 seconds passes.
@@ -54,6 +54,6 @@ public class DriveCircleTouch extends LinearOpMode
 
         // turn the motors off.
 
-        rightMotor.setPower(0);
-        leftMotor.setPower(0);{
+        motorBackRight.setPower(0);
+        motorBackLeft.setPower(0);{
 }
