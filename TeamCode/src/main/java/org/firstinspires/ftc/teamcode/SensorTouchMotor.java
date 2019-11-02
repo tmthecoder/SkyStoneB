@@ -3,26 +3,21 @@ package org.firstinspires.ftc.teamcode;
 // simple autonomous program that drives bot in a circle then ends.
 // this code assumes it will end before the period is over but if the period ended while
 // still driving, this code will just stop. Stops after 5 seconds or on touch sensor button.
-
-package org.firstinspires.ftc.teamcode;
-
         import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         import com.qualcomm.robotcore.hardware.DcMotor;
         import com.qualcomm.robotcore.hardware.TouchSensor;
 
-@Autonomous(name="Drive Circle Touch", group="Exercises")
+@Autonomous(name="Sensor Touch Motor", group="Exercises")
 //@Disabled
-public class DriveCircleTouch extends LinearOpMode
-{
-    DcMotor     leftMotor;
-    DcMotor     rightMotor;
+public class SensorTouchMotor extends LinearOpMode {
+    DcMotor leftMotor;
+    DcMotor rightMotor;
     TouchSensor touch;
 
     // called when init button is  pressed.
     @Override
-    public void runOpMode() throws InterruptedException
-    {
+    public void runOpMode() throws InterruptedException {
         leftMotor = hardwareMap.dcMotor.get("left_motor");
         rightMotor = hardwareMap.dcMotor.get("right_motor");
 
@@ -50,10 +45,15 @@ public class DriveCircleTouch extends LinearOpMode
         resetStartTime();
         // drive until touch sensor button pressed or 5 seconds passes.
 
-        while (getRuntime() < 5 && !touch.isPressed()) { idle(); }
+        while (getRuntime() < 5 && !touch.isPressed()) {
+            idle();
+        }
 
         // turn the motors off.
 
         rightMotor.setPower(0);
-        leftMotor.setPower(0);{
+        leftMotor.setPower(0);
+        {
+        }
+    }
 }

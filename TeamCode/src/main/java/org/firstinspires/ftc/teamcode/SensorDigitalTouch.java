@@ -81,7 +81,6 @@ public class SensorDigitalTouch extends LinearOpMode {
             } else {
                 telemetry.addData("Digital Touch", "Is Pressed");
             }
-
             telemetry.update();
         }
     }
