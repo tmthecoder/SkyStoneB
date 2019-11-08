@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "Concept: HolonomicDrive", group = "Concept")
@@ -38,6 +39,8 @@ public class HolonomicDrive extends OpMode{
         DcMotor motorFrontLeft;
         DcMotor motorBackRight;
         DcMotor motorBackLeft;
+        Servo intakeServo;
+    // public DcMotor intakeServo = hardwareMap.dcMotor.get("intakeDrive");
 
         /**
          * Constructor
@@ -59,6 +62,7 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            intakeServo = hardwareMap.servo.get("intakeServo");
             //These work without reversing (Tetrix motors).
             //AndyMark motors may be opposite, in which case uncomment these lines:
             //motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -86,11 +90,35 @@ public class HolonomicDrive extends OpMode{
             float BackRight = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
             float BackLeft = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
 
+            // servos
+
+            float RightTrigger = gamepad2.right_trigger;
+            float LeftTrigger = gamepad2.left_trigger;
+            boolean ServoUp = false;
+            boolean ServoDown = false;
+
             // clip the right/left values so that the values never exceed +/- 1
             FrontRight = Range.clip(FrontRight, -1, 1);
             FrontLeft = Range.clip(FrontLeft, -1, 1);
             BackLeft = Range.clip(BackLeft, -1, 1);
             BackRight = Range.clip(BackRight, -1, 1);
+
+            RightTrigger = Range.clip(RightTrigger, -1, 1);
+            LeftTrigger = Range.clip(LeftTrigger, - 1, 1);
+
+            if (RightTrigger > 0.1) ServoUp = true;
+            if (LeftTrigger > 0.1) ServoDown = true;
+            if (ServoUp && ServoDown) ServoUp = false; ServoDown = false;
+
+            if (ServoUp)
+            {
+                intakeServo.setDirection(Servo.Direction.FORWARD);
+            }
+
+            if (ServoDown)
+            {
+                intakeServo.setDirection(Servo.Direction.REVERSE);
+            }
 
             // write the values to the motors
             motorFrontRight.setPower(FrontRight);
