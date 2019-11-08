@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -39,7 +41,7 @@ public class HolonomicDrive extends OpMode{
         DcMotor motorFrontLeft;
         DcMotor motorBackRight;
         DcMotor motorBackLeft;
-        Servo intakeServo;
+        CRServo intakeServo;
     // public DcMotor intakeServo = hardwareMap.dcMotor.get("intakeDrive");
 
         /**
@@ -62,7 +64,7 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
-            intakeServo = hardwareMap.servo.get("intakeServo");
+            intakeServo = hardwareMap.crservo.get("intakeServo");
             //These work without reversing (Tetrix motors).
             //AndyMark motors may be opposite, in which case uncomment these lines:
             //motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -90,34 +92,67 @@ public class HolonomicDrive extends OpMode{
             float BackRight = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
             float BackLeft = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
 
-            // servos
-
-            float RightTrigger = gamepad2.right_trigger;
-            float LeftTrigger = gamepad2.left_trigger;
-            boolean ServoUp = false;
-            boolean ServoDown = false;
-
             // clip the right/left values so that the values never exceed +/- 1
             FrontRight = Range.clip(FrontRight, -1, 1);
             FrontLeft = Range.clip(FrontLeft, -1, 1);
             BackLeft = Range.clip(BackLeft, -1, 1);
             BackRight = Range.clip(BackRight, -1, 1);
 
-            RightTrigger = Range.clip(RightTrigger, -1, 1);
-            LeftTrigger = Range.clip(LeftTrigger, - 1, 1);
+            /*
+            servo variable initialization
+             */
+            float RightTrigger = gamepad2.right_trigger;
+            float LeftTrigger = gamepad2.left_trigger;
+            boolean ServoUp = false;
+            boolean ServoDown = false;
 
+            /*
+            make sure variables are in bound
+             */
+            RightTrigger = Range.clip(RightTrigger, -1, 1);
+            LeftTrigger = Range.clip(LeftTrigger, -1, 1);
+
+            /*
+            check if triggers are pressed, and if so,
+            set ServoUp or ServoDown
+             */
             if (RightTrigger > 0.1) ServoUp = true;
             if (LeftTrigger > 0.1) ServoDown = true;
-            if (ServoUp && ServoDown) ServoUp = false; ServoDown = false;
-
-            if (ServoUp)
+            if (ServoUp && ServoDown) // if both are pressed down deactive both of them
             {
-                intakeServo.setDirection(Servo.Direction.FORWARD);
+                ServoUp = false;
+                ServoDown = false;
             }
 
+            /*
+            If neither of the triggers are pressed down
+            set the power to 0, stopping the servo
+             */
+            if (!ServoUp && !ServoDown)
+            {
+                intakeServo.setPower(0.0);
+            }
+
+            /*
+            If the right trigger is pressed (ServoUp),
+            then the servo should move with a power
+            factor of 1.
+             */
+            if (ServoUp)
+            {
+                // intakeServo.setDirection(CRServo.Direction.FORWARD);
+                intakeServo.setPower(1.0);
+            }
+
+            /*
+            If the left trigger is pressed (ServoDown),
+            then the servo should move with a power
+            factor of -1.
+             */
             if (ServoDown)
             {
-                intakeServo.setDirection(Servo.Direction.REVERSE);
+                // intakeServo.setDirection(CRServo.Direction.REVERSE);
+                intakeServo.setPower(-1.0);
             }
 
             // write the values to the motors
@@ -131,6 +166,9 @@ public class HolonomicDrive extends OpMode{
              * Telemetry for debugging
              */
             telemetry.addData("Text", "*** Robot Data***");
+            telemetry.addData("ServoUp", ServoUp);
+            telemetry.addData("ServoDown", ServoDown);
+            telemetry.addData("ServoPower", intakeServo.getPower());
             telemetry.addData("Joy XL YL XR",  String.format("%.2f", gamepad1LeftX) + " " +
                     String.format("%.2f", gamepad1LeftY) + " " +  String.format("%.2f", gamepad1RightX));
             telemetry.addData("f left pwr",  "front left  pwr: " + String.format("%.2f", FrontLeft));
