@@ -42,6 +42,7 @@ public class HolonomicDrive extends OpMode{
         DcMotor motorBackRight;
         DcMotor motorBackLeft;
         CRServo intakeServo;
+        Servo pincherServo;
     // public DcMotor intakeServo = hardwareMap.dcMotor.get("intakeDrive");
 
         /**
@@ -65,6 +66,7 @@ public class HolonomicDrive extends OpMode{
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
             intakeServo = hardwareMap.crservo.get("intakeServo");
+            pincherServo = hardwareMap.servo.get("pincherServo");
             //These work without reversing (Tetrix motors).
             //AndyMark motors may be opposite, in which case uncomment these lines:
             //motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -103,8 +105,12 @@ public class HolonomicDrive extends OpMode{
              */
             float RightTrigger = gamepad2.right_trigger;
             float LeftTrigger = gamepad2.left_trigger;
-            boolean ServoUp = false;
-            boolean ServoDown = false;
+            boolean RightBumper = gamepad2.right_bumper;
+            boolean LeftBumper = gamepad2.left_bumper;
+            boolean grabberRetract = false;
+            boolean grabberExtend = false;
+            boolean grabberRelease = false;
+            boolean grabberPinch = false;
 
             /*
             make sure variables are in bound
@@ -112,49 +118,65 @@ public class HolonomicDrive extends OpMode{
             RightTrigger = Range.clip(RightTrigger, -1, 1);
             LeftTrigger = Range.clip(LeftTrigger, -1, 1);
 
+
+
             /*
             check if triggers are pressed, and if so,
-            set ServoUp or ServoDown
+            set grabberRetract or grabberExtend
              */
-            if (RightTrigger > 0.1) ServoUp = true;
-            if (LeftTrigger > 0.1) ServoDown = true;
-            if (ServoUp && ServoDown) // if both are pressed down deactive both of them
+            if (RightTrigger > 0.1) grabberRetract = true;
+            if (LeftTrigger > 0.1) grabberExtend = true;
+            if (RightBumper) grabberRelease = true;
+            if (LeftBumper) grabberPinch = true;
+            if (grabberRetract && grabberExtend) // if both are pressed down deactive both of them
             {
-                ServoUp = false;
-                ServoDown = false;
+                grabberRetract = false;
+                grabberExtend = false;
             }
-
+            if (grabberRelease && grabberPinch)
+            {
+                grabberRelease = false;
+                grabberPinch = false;
+            }
             /*
             If neither of the triggers are pressed down
             set the power to 0, stopping the servo
              */
-            if (!ServoUp && !ServoDown)
+            if (!grabberRetract && !grabberExtend)
             {
                 intakeServo.setPower(0.0);
             }
 
+
             /*
-            If the right trigger is pressed (ServoUp),
+            If the right trigger is pressed (grabberRetract),
             then the servo should move with a power
             factor of 1.
              */
-            if (ServoUp)
+            if (grabberRetract)
             {
                 // intakeServo.setDirection(CRServo.Direction.FORWARD);
                 intakeServo.setPower(1.0);
             }
 
             /*
-            If the left trigger is pressed (ServoDown),
+            If the left trigger is pressed (grabberExtend),
             then the servo should move with a power
             factor of -1.
              */
-            if (ServoDown)
+            if (grabberExtend)
             {
                 // intakeServo.setDirection(CRServo.Direction.REVERSE);
                 intakeServo.setPower(-1.0);
             }
-
+            if (grabberRelease)
+            {
+                pincherServo.setPosition(1);
+            }
+            if (grabberPinch)
+            {
+                pincherServo.setPosition(0);
+            }
             // write the values to the motors
             motorFrontRight.setPower(FrontRight);
             motorFrontLeft.setPower(FrontLeft);
@@ -166,8 +188,8 @@ public class HolonomicDrive extends OpMode{
              * Telemetry for debugging
              */
             telemetry.addData("Text", "*** Robot Data***");
-            telemetry.addData("ServoUp", ServoUp);
-            telemetry.addData("ServoDown", ServoDown);
+            telemetry.addData("grabberRetract", grabberRetract);
+            telemetry.addData("grabberExtend", grabberExtend);
             telemetry.addData("ServoPower", intakeServo.getPower());
             telemetry.addData("Joy XL YL XR",  String.format("%.2f", gamepad1LeftX) + " " +
                     String.format("%.2f", gamepad1LeftY) + " " +  String.format("%.2f", gamepad1RightX));
