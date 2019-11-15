@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -7,6 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+
 
 @TeleOp(name = "Concept: HolonomicDrive", group = "Concept")
 
@@ -43,7 +46,7 @@ public class HolonomicDrive extends OpMode{
         DcMotor motorBackLeft;
         CRServo intakeServo;
         Servo pincherServo;
-    // public DcMotor intakeServo = hardwareMap.dcMotor.get("intakeDrive");
+        RevTouchSensor digitalTouch;
 
         /**
          * Constructor
@@ -67,6 +70,8 @@ public class HolonomicDrive extends OpMode{
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
             intakeServo = hardwareMap.crservo.get("intakeServo");
             pincherServo = hardwareMap.servo.get("pincherServo");
+            digitalTouch = hardwareMap.get(RevTouchSensor.class, "digitalTouch");
+
             //These work without reversing (Tetrix motors).
             //AndyMark motors may be opposite, in which case uncomment these lines:
             //motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -111,6 +116,8 @@ public class HolonomicDrive extends OpMode{
             boolean grabberExtend = false;
             boolean grabberRelease = false;
             boolean grabberPinch = false;
+
+            //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
             /*
             make sure variables are in bound
@@ -177,6 +184,11 @@ public class HolonomicDrive extends OpMode{
             {
                 pincherServo.setPosition(0);
             }
+            if (digitalTouch.isPressed() && gamepad2.left_trigger > 0) {
+                intakeServo.setPower(0.0);
+            }
+            telemetry.addData("SENSOR: ", digitalTouch.isPressed());
+            telemetry.update();
             // write the values to the motors
             motorFrontRight.setPower(FrontRight);
             motorFrontLeft.setPower(FrontLeft);
