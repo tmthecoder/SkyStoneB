@@ -5,8 +5,23 @@ import com.qualcomm.robotcore.eventloop.opmode;
 import com.qualcomm.robotcore.exception;
 import com.qualcomm.robotcore.hardware;
 import com.qualcomm.robotcore.util;
+import com.qualcomm.hardware.rev.RevTouchSensor;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
+import java.util.Scanner;
 
 public class PlateGrabber {
+    // run until the end of the match (driver presses STOP)
     // run until the end of the match (driver presses STOP)
     double tgtPower = 0;
 while(
@@ -32,6 +47,5 @@ while(
         telemetry.addData("Motor Power", motorTest.getPower());
         telemetry.addData("Status", "Running");
         telemetry.update();
-
     }
 }

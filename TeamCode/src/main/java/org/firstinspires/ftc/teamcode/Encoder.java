@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 @Autonomous(name="Encodertesting", group="Pushbot")
-public class EncoderTest extends LinearOpMode {
+public class Encoder extends LinearOpMode {
     /* Declare OpMode members. */
 
     public DcMotor  motorFL;
