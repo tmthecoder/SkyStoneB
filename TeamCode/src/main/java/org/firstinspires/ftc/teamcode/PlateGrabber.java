@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.ftccommon;
-import com.qualcomm.robotcore.eventloop;
-import com.qualcomm.robotcore.eventloop.opmode;
-import com.qualcomm.robotcore.exception;
-import com.qualcomm.robotcore.hardware;
-import com.qualcomm.robotcore.util;
 
-public class PlateGrabber {
+/*import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+@Disabled
+public class PlateGrabber extends LinearOpMode {
     // run until the end of the match (driver presses STOP)
+    private Servo servoTest;
     double tgtPower = 0;
 while(
 
@@ -35,3 +34,4 @@ while(
 
     }
 }
+ */
