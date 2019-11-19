@@ -40,7 +40,7 @@ public class HolonomicDrive extends OpMode{
 
         public DcMotor motorFrontRight;
         public DcMotor motorFrontLeft;
-        public DcMotor motorBackRight;
+        //public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
         public DcMotor lifterMotor;
         CRServo intakeServo;
@@ -66,7 +66,8 @@ public class HolonomicDrive extends OpMode{
             motorFrontRight = hardwareMap.dcMotor.get("frontRightDrive");
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
-            motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            //
+            //motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
             lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
             intakeServo = hardwareMap.crservo.get("intakeServo");
             pincherServo = hardwareMap.servo.get("pincherServo");
@@ -193,19 +194,27 @@ public class HolonomicDrive extends OpMode{
             if (digitalTouch.isPressed() && gamepad2.left_trigger > 0) {
                 intakeServo.setPower(0.0);
             }
-            // LifterMotor Button A Button B if statements
             if (ButtonA) lifterUp = true;
-            if (ButtonB) lifterDown = true;;
+            if (ButtonB) lifterDown = true;
             if (lifterDown && lifterUp) {
                 lifterDown = false;
                 lifterUp = false;
             }
-            if (lifterUp = true) {
+
+            // LifterMotor Button A Button B if statements
+            if (lifterUp) {
                 lifterMotor.setPower(0.5);
             }
-            if (lifterDown = true) {
+            if (lifterDown) {
                 lifterMotor.setPower(-0.5);
             }
+
+            if (!lifterUp && !lifterDown)
+            {
+                lifterMotor.setPower(0.0);
+            }
+
+
 
             telemetry.addData("SENSOR: ", digitalTouch.isPressed());
             telemetry.update();
@@ -213,7 +222,7 @@ public class HolonomicDrive extends OpMode{
             motorFrontRight.setPower(FrontRight);
             motorFrontLeft.setPower(FrontLeft);
             motorBackLeft.setPower(BackLeft);
-            motorBackRight.setPower(BackRight);
+            //motorBackRight.setPower(BackRight);
 
 
 
