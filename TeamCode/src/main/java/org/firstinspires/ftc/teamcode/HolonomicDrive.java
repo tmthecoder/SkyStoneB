@@ -38,10 +38,10 @@ public class HolonomicDrive extends OpMode{
     */
 //@Disabled
 
-        DcMotor motorFrontRight;
-        DcMotor motorFrontLeft;
-        DcMotor motorBackRight;
-        DcMotor motorBackLeft;
+        public DcMotor motorFrontRight;
+        public DcMotor motorFrontLeft;
+        public DcMotor motorBackRight;
+        public DcMotor motorBackLeft;
         CRServo intakeServo;
         Servo pincherServo;
         RevTouchSensor digitalTouch;

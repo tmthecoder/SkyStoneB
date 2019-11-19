@@ -47,8 +47,10 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
+    public DcMotor motorFrontRight;
+    public DcMotor motorFrontLeft;
+    public DcMotor motorBackRight;
+    public DcMotor motorBackLeft;
 
     @Override
     public void runOpMode() {
@@ -59,11 +61,15 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        motorFrontRight = hardwareMap.dcMotor.get("frontRightDrive");
+        motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
+        motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
+        motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
 
         //Motors moving now
-        leftDrive.setPower(1);
-        rightDrive.setPower(2);
-    }
+        motorBackRight.setPower(1);
+        motorBackLeft.setPower(1);
+        motorFrontLeft.setPower(1);
+        motorFrontRight.setPower(1);
+        
     }
