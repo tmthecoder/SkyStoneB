@@ -43,7 +43,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 @Autonomous(name= "Autonomous: Linear Opmode", group = "Linear Opmode")
 @Disabled
 
-public class MyFIRSTJavaOpMode extends LinearOpMode{
+public class MyFIRSTJavaOpMode extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -66,10 +66,11 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
         motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
         motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
 
-        //Motors moving now
+        // Motors moving now
         motorBackRight.setPower(1);
         motorBackLeft.setPower(1);
         motorFrontLeft.setPower(1);
         motorFrontRight.setPower(1);
-        
+
     }
+}

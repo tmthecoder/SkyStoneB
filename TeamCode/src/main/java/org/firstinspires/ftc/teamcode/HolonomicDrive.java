@@ -42,6 +42,7 @@ public class HolonomicDrive extends OpMode{
         public DcMotor motorFrontLeft;
         public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
+        public DcMotor lifterMotor;
         CRServo intakeServo;
         Servo pincherServo;
         RevTouchSensor digitalTouch;
@@ -66,6 +67,7 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
             intakeServo = hardwareMap.crservo.get("intakeServo");
             pincherServo = hardwareMap.servo.get("pincherServo");
             digitalTouch = hardwareMap.get(RevTouchSensor.class, "digitalTouch");
@@ -110,10 +112,16 @@ public class HolonomicDrive extends OpMode{
             float LeftTrigger = gamepad2.left_trigger;
             boolean RightBumper = gamepad2.right_bumper;
             boolean LeftBumper = gamepad2.left_bumper;
+            boolean ButtonA = gamepad2.a;
+            boolean ButtonB = gamepad2.b;
             boolean grabberRetract = false;
             boolean grabberExtend = false;
             boolean grabberRelease = false;
             boolean grabberPinch = false;
+
+           // Defining the booleans lifterUp and lifterDown
+            boolean lifterUp = false;
+            boolean lifterDown = false;
 
             //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
@@ -185,6 +193,20 @@ public class HolonomicDrive extends OpMode{
             if (digitalTouch.isPressed() && gamepad2.left_trigger > 0) {
                 intakeServo.setPower(0.0);
             }
+            // LifterMotor Button A Button B if statements
+            if (ButtonA) lifterUp = true;
+            if (ButtonB) lifterDown = true;;
+            if (lifterDown && lifterUp) {
+                lifterDown = false;
+                lifterUp = false;
+            }
+            if (lifterUp = true) {
+                lifterMotor.setPower(0.5);
+            }
+            if (lifterDown = true) {
+                lifterMotor.setPower(-0.5);
+            }
+
             telemetry.addData("SENSOR: ", digitalTouch.isPressed());
             telemetry.update();
             // write the values to the motors
@@ -192,6 +214,8 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft.setPower(FrontLeft);
             motorBackLeft.setPower(BackLeft);
             motorBackRight.setPower(BackRight);
+
+
 
 
             /*
