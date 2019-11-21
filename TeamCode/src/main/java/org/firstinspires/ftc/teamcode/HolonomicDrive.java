@@ -5,10 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 
 @TeleOp(name = "Concept: HolonomicDrive", group = "Concept")
@@ -40,10 +38,11 @@ public class HolonomicDrive extends OpMode{
     */
 //@Disabled
 
-        DcMotor motorFrontRight;
-        DcMotor motorFrontLeft;
-        DcMotor motorBackRight;
-        DcMotor motorBackLeft;
+        public DcMotor motorFrontRight;
+        public DcMotor motorFrontLeft;
+        //public DcMotor motorBackRight;
+        public DcMotor motorBackLeft;
+        public DcMotor lifterMotor;
         CRServo intakeServo;
         Servo pincherServo;
         RevTouchSensor digitalTouch;
@@ -67,7 +66,9 @@ public class HolonomicDrive extends OpMode{
             motorFrontRight = hardwareMap.dcMotor.get("frontRightDrive");
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
-            motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            //
+            //motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
             intakeServo = hardwareMap.crservo.get("intakeServo");
             pincherServo = hardwareMap.servo.get("pincherServo");
             digitalTouch = hardwareMap.get(RevTouchSensor.class, "digitalTouch");
@@ -112,10 +113,16 @@ public class HolonomicDrive extends OpMode{
             float LeftTrigger = gamepad2.left_trigger;
             boolean RightBumper = gamepad2.right_bumper;
             boolean LeftBumper = gamepad2.left_bumper;
+            boolean ButtonA = gamepad2.a;
+            boolean ButtonB = gamepad2.b;
             boolean grabberRetract = false;
             boolean grabberExtend = false;
             boolean grabberRelease = false;
             boolean grabberPinch = false;
+
+           // Defining the booleans lifterUp and lifterDown
+            boolean lifterUp = false;
+            boolean lifterDown = false;
 
             //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
@@ -187,13 +194,37 @@ public class HolonomicDrive extends OpMode{
             if (digitalTouch.isPressed() && gamepad2.left_trigger > 0) {
                 intakeServo.setPower(0.0);
             }
+            if (ButtonA) lifterUp = true;
+            if (ButtonB) lifterDown = true;
+            if (lifterDown && lifterUp) {
+                lifterDown = false;
+                lifterUp = false;
+            }
+
+            // LifterMotor Button A Button B if statements
+            if (lifterUp) {
+                lifterMotor.setPower(0.5);
+            }
+            if (lifterDown) {
+                lifterMotor.setPower(-0.5);
+            }
+
+            if (!lifterUp && !lifterDown)
+            {
+                lifterMotor.setPower(0.0);
+            }
+
+
+
             telemetry.addData("SENSOR: ", digitalTouch.isPressed());
             telemetry.update();
             // write the values to the motors
             motorFrontRight.setPower(FrontRight);
             motorFrontLeft.setPower(FrontLeft);
             motorBackLeft.setPower(BackLeft);
-            motorBackRight.setPower(BackRight);
+            //motorBackRight.setPower(BackRight);
+
+
 
 
             /*
