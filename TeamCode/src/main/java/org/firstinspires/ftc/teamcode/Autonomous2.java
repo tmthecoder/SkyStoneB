@@ -1,32 +1,30 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.ftcrobotcontroller.R;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * An empty op mode serving as a template for custom OpModes
  */
-public class Autonomous2 extends OpMode {
+public abstract class Autonomous2 extends OpMode {
 
-    DcMotor rightMotor;
-    DcMotor leftMotor;
+    private DcMotor rightMotor;
+    private DcMotor leftMotor;
 
-    int ENCODER_PPR = 1440;
-    int LEFT_TARGET_FORWARD = -2*ENCODER_PPR;
-    int RIGHT_TARGET_FORWARD = 2*ENCODER_PPR;
-    int THRESHOLD = 10;
+    private int ENCODER_PPR = 1440;
+    private int LEFT_TARGET_FORWARD = -2*ENCODER_PPR;
+    private int RIGHT_TARGET_FORWARD = 2*ENCODER_PPR;
+    private int THRESHOLD = 10;
 
     enum State {ResetEncoders, StartEncoders, WaitUntilInPosition, OptionalStopMotors, Done}
 
-    State state;
+    private State state;
 
     /*
      * Constructor
      */
-    public Autonomous2() {
+    private Autonomous2() {
 
     }
 
@@ -59,8 +57,8 @@ public class Autonomous2 extends OpMode {
         switch(state) {
             case ResetEncoders:
                 //Reset both encoders
-                leftMotor.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-                rightMotor.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
+                leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+                rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
 
                 //Transition to the next state
                 state = State.StartEncoders;
@@ -72,8 +70,8 @@ public class Autonomous2 extends OpMode {
                 rightMotor.setTargetPosition(RIGHT_TARGET_FORWARD);
 
                 //Set the motor channel to run to the target position set above
-                leftMotor.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);
-                rightMotor.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);
+                leftMotor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+                rightMotor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
 
                 //Set the motors to drive at the given speed to the position
                 leftMotor.setPower(0.5);
