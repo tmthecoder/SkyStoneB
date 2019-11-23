@@ -15,7 +15,7 @@ public class HolonomicDrive extends OpMode{
 
     /**
      *
-     * Created by Maddie, FTC Team 4962, The Rockettes
+     * Created by Akash, FTC Team 4962, The Rockettes
      * version 1.0 Aug 11, 2016
      *
      */
