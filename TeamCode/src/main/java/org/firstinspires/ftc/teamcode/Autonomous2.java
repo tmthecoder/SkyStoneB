@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 /**
  * An empty op mode serving as a template for custom OpModes
  */
-public abstract class Autonomous2 extends OpMode {
+/*public abstract class Autonomous2 extends OpMode {
 
     private DcMotor rightMotor;
     private DcMotor leftMotor;
@@ -24,7 +24,7 @@ public abstract class Autonomous2 extends OpMode {
     /*
      * Constructor
      */
-    private Autonomous2() {
+   /* private Autonomous2() {
 
     }
 
@@ -32,7 +32,7 @@ public abstract class Autonomous2 extends OpMode {
      * Code to run when the op mode is first enabled goes here
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
      */
-    @Override
+    /*@Override
     public void start() {
         //get references to the motors from the hardware map
         leftMotor = hardwareMap.dcMotor.get("motor_1");
@@ -51,7 +51,7 @@ public abstract class Autonomous2 extends OpMode {
      * This method will be called repeatedly in a loop
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#loop()
      */
-    @Override
+  /*  @Override
     public void loop() {
 
         switch(state) {
@@ -126,7 +126,7 @@ public abstract class Autonomous2 extends OpMode {
      * Code to run when the op mode is first disabled goes here
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
      */
-    @Override
+   /* @Override
     public void stop() {
 
     }
@@ -137,3 +137,4 @@ public abstract class Autonomous2 extends OpMode {
         return b;
     }
 }
+*/

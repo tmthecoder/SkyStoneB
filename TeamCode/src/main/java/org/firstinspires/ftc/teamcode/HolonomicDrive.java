@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -221,7 +222,7 @@ public class HolonomicDrive extends OpMode{
             motorFrontRight.setPower(FrontRight);
             motorFrontLeft.setPower(FrontLeft);
             motorBackLeft.setPower(BackLeft);
-            //motorBackRight.setPower(BackRight);
+            motorBackRight.setPower(BackRight);
 
 
 
