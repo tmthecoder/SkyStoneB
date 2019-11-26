@@ -40,7 +40,7 @@ public class HolonomicDrive extends OpMode{
 
         public DcMotor motorFrontRight;
         public DcMotor motorFrontLeft;
-        //public DcMotor motorBackRight;
+        public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
         public DcMotor lifterMotor;
         CRServo intakeServo;
@@ -66,8 +66,7 @@ public class HolonomicDrive extends OpMode{
             motorFrontRight = hardwareMap.dcMotor.get("frontRightDrive");
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
-            //
-            //motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
             lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
             intakeServo = hardwareMap.crservo.get("intakeServo");
             pincherServo = hardwareMap.servo.get("pincherServo");
