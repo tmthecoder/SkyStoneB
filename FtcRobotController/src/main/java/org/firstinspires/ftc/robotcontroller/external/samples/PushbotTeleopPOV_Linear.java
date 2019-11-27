@@ -27,9 +27,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+//package org.firstinspires.ftc.robotcontroller.external.samples;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+/*import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -47,12 +47,13 @@ import com.qualcomm.robotcore.util.Range;
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-
+/*
 @TeleOp(name="Pushbot: Teleop POV", group="Pushbot")
 @Disabled
 public class PushbotTeleopPOV_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
+/*
     HardwarePushbot robot           = new HardwarePushbot();   // Use a Pushbot's hardware
     double          clawOffset      = 0;                       // Servo mid position
     final double    CLAW_SPEED      = 0.02 ;                   // sets rate to move servo
@@ -68,6 +69,7 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
+/*
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
@@ -132,3 +134,4 @@ public class PushbotTeleopPOV_Linear extends LinearOpMode {
         }
     }
 }
+*/

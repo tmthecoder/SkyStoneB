@@ -93,8 +93,10 @@ public class ConceptCompassCalibration extends LinearOpMode {
         // Start the robot rotating clockwise
         telemetry.addData("Compass", "Calibration mode. Turning the robot...");
         telemetry.update();
-        robot.leftDrive.setPower(MOTOR_POWER);
-        robot.rightDrive.setPower(-MOTOR_POWER);
+        robot.motorBackLeft.setPower(MOTOR_POWER);
+        robot.motorBackRight.setPower(-MOTOR_POWER);
+        robot.motorFrontLeft.setPower(-MOTOR_POWER);
+        robot.motorFrontRight.setPower(-MOTOR_POWER);
 
         // run until time expires OR the driver presses STOP;
         runtime.reset();
@@ -103,8 +105,12 @@ public class ConceptCompassCalibration extends LinearOpMode {
         }
 
         // Stop all motors and turn off claibration
-        robot.leftDrive.setPower(0);
-        robot.rightDrive.setPower(0);
+        robot.motorBackLeft.setPower(0);
+        robot.motorBackRight.setPower(0);
+        robot.motorFrontRight.setPower(0);
+        robot.motorFrontLeft.setPower(0);
+
+
         compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
         telemetry.addData("Compass", "Returning to measurement mode");
         telemetry.update();
