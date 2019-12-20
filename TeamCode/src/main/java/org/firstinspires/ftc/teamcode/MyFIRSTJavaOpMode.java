@@ -35,7 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-
+import java.lang.Thread;
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
  * It uses the common Pushbot hardware class to define the drive on the robot.
@@ -131,23 +131,11 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         /*
-        ajfgkjdshdfkja eaydb iahg ka
-        df hjkfdgh sfg
-        sfgh s
-        dfg hs
-        dfg hs
-        fdg hs
-        fdgh s
-        dfgh s
-        dfgh a
-        dr yawe
-         ha
-         g
          */
-        encoderDrive(DRIVE_SPEED,  52,  52, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  -5,  5, 5.0);  // S1: Forward 5 Inches with 5 Sec timeout
         //encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         //encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
-
+        //Thread.sleep(15000);
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }

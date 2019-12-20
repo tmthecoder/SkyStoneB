@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 import java.lang.Thread;
@@ -63,9 +64,9 @@ import java.lang.Thread;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Go park and then move to the middle", group="Pushbot")
+@Autonomous(name="Pushbot: Servos in Autonomous", group="Pushbot")
 //@Disabled
-public class Autonomous2 extends LinearOpMode {
+public class ServoAutonomous extends LinearOpMode {
 
 
     /* Declare OpMode members. */
@@ -84,6 +85,7 @@ public class Autonomous2 extends LinearOpMode {
     public DcMotor motorFrontLeft;
     public DcMotor motorBackRight;
     public DcMotor motorBackLeft;
+           Servo   buildingZone;
 
     @Override
     public void runOpMode() {
@@ -92,6 +94,7 @@ public class Autonomous2 extends LinearOpMode {
         motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
         motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
         motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+        buildingZone = hardwareMap.servo.get("buildingZone");
 
 
 
@@ -122,7 +125,7 @@ public class Autonomous2 extends LinearOpMode {
                 motorBackLeft.getCurrentPosition(),
                 motorBackRight.getCurrentPosition(),
                 motorFrontRight.getCurrentPosition(),
-                motorFrontLeft.getCurrentPosition());
+                motorFrontLeft.getCurrentPosition());- 
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)

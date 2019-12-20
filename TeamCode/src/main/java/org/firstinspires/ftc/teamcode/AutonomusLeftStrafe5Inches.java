@@ -35,7 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-import java.lang.Thread;
+
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
  * It uses the common Pushbot hardware class to define the drive on the robot.
@@ -63,9 +63,9 @@ import java.lang.Thread;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Go park and then move to the middle", group="Pushbot")
+@Autonomous(name="Pushbot: Autonomous Left Strafe 5 Inches", group="Pushbot")
 //@Disabled
-public class Autonomous2 extends LinearOpMode {
+public class AutonomusLeftStrafe5Inches extends LinearOpMode {
 
 
     /* Declare OpMode members. */
@@ -132,10 +132,10 @@ public class Autonomous2 extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         /*
          */
-        encoderDrive(DRIVE_SPEED,  -5,  5, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   0, 5, 4.0);  // S2: Turn Right 5 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  0,  5, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        //encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         //encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
-        //Thread.sleep(15000);
+
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
