@@ -47,9 +47,9 @@ public class HolonomicDrive extends OpMode{
         public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
         public DcMotor lifterMotor;
-        CRServo intakeServo;
-        Servo pincherServo;
-        RevTouchSensor digitalTouch;
+       // CRServo intakeServo;
+        //Servo pincherServo;
+        //RevTouchSensor digitalTouch;
 
         /**
          * Constructor
@@ -72,10 +72,12 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
-            lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
+           /* lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
             intakeServo = hardwareMap.crservo.get("intakeServo");
             pincherServo = hardwareMap.servo.get("pincherServo");
             digitalTouch = hardwareMap.get(RevTouchSensor.class, "digitalTouch");
+            */
+
 
             //These work without reversing (Tetrix motors).
             //AndyMark motors may be opposite, in which case uncomment these lines:
@@ -162,7 +164,7 @@ public class HolonomicDrive extends OpMode{
              */
             if (!grabberRetract && !grabberExtend)
             {
-                intakeServo.setPower(0.0);
+               // intakeServo.setPower(0.0);
             }
 
 
@@ -174,7 +176,7 @@ public class HolonomicDrive extends OpMode{
             if (grabberRetract)
             {
                 // intakeServo.setDirection(CRServo.Direction.FORWARD);
-                intakeServo.setPower(1.0);
+                //intakeServo.setPower(1.0);
             }
 
             /*
@@ -185,19 +187,19 @@ public class HolonomicDrive extends OpMode{
             if (grabberExtend)
             {
                 // intakeServo.setDirection(CRServo.Direction.REVERSE);
-                intakeServo.setPower(-1.0);
+                //intakeServo.setPower(-1.0);
             }
             if (grabberRelease)
             {
-                pincherServo.setPosition(1);
+                //pincherServo.setPosition(1);
             }
             if (grabberPinch)
             {
-                pincherServo.setPosition(0);
+                //pincherServo.setPosition(0);
             }
-            if (digitalTouch.isPressed() && gamepad2.left_trigger > 0) {
-                intakeServo.setPower(0.0);
-            }
+           // if (digitalTouch.isPressed() && gamepad2.left_trigger > 0) {
+               // intakeServo.setPower(0.0);
+           // }
             if (ButtonA) lifterUp = true;
             if (ButtonB) lifterDown = true;
             if (lifterDown && lifterUp) {
@@ -220,8 +222,12 @@ public class HolonomicDrive extends OpMode{
 
 
 
-            telemetry.addData("SENSOR: ", digitalTouch.isPressed());
-            telemetry.update();
+            /*telemetry.addData("SENSOR: ",
+                    //digitalTouch.isPressed()
+            );
+            */
+
+           // telemetry.update();
             // write the values to the motors
             motorFrontRight.setPower(FrontRight);
             motorFrontLeft.setPower(FrontLeft);
@@ -234,17 +240,18 @@ public class HolonomicDrive extends OpMode{
             /*
              * Telemetry for debugging
              */
+            /*
             telemetry.addData("Text", "*** Robot Data***");
             telemetry.addData("grabberRetract", grabberRetract);
             telemetry.addData("grabberExtend", grabberExtend);
-            telemetry.addData("ServoPower", intakeServo.getPower());
+            telemetry.addData("ServoPower", //intakeServo.getPower());
             telemetry.addData("Joy XL YL XR",  String.format("%.2f", gamepad1LeftX) + " " +
-                    String.format("%.2f", gamepad1LeftY) + " " +  String.format("%.2f", gamepad1RightX));
+            String.format("%.2f", gamepad1LeftY) + " " +  String.format("%.2f", gamepad1RightX));
             telemetry.addData("f left pwr",  "front left  pwr: " + String.format("%.2f", FrontLeft));
             telemetry.addData("f right pwr", "front right pwr: " + String.format("%.2f", FrontRight));
             telemetry.addData("b right pwr", "back right pwr: " + String.format("%.2f", BackRight));
             telemetry.addData("b left pwr", "back left pwr: " + String.format("%.2f", BackLeft));
-
+            */
         }
 
         @Override
