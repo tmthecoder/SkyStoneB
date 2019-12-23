@@ -125,7 +125,7 @@ public class ServoAutonomous extends LinearOpMode {
                 motorBackLeft.getCurrentPosition(),
                 motorBackRight.getCurrentPosition(),
                 motorFrontRight.getCurrentPosition(),
-                motorFrontLeft.getCurrentPosition());- 
+                motorFrontLeft.getCurrentPosition());
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
