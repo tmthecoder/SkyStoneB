@@ -19,7 +19,7 @@ public class HolonomicDrive extends OpMode{
 
     /**
      *
-     * Created by Akash and Rohan, FTC Team 4962, Tactical Terror
+     * Created by Akash and Rohan, FTC Team 11752, Tactical Terror
      * version 1.0 October-November 2019
      *
      */
@@ -72,7 +72,8 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
-           /* lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
+            lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
+            /*
             intakeServo = hardwareMap.crservo.get("intakeServo");
             pincherServo = hardwareMap.servo.get("pincherServo");
             digitalTouch = hardwareMap.get(RevTouchSensor.class, "digitalTouch");
