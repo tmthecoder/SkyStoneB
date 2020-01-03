@@ -46,6 +46,7 @@ public class HolonomicDrive extends OpMode{
         public DcMotor motorFrontLeft;
         public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
+        public DcMotor armMotor;
         //public DcMotor lifterMotor;
        // CRServo intakeServo;
         //Servo pincherServo;
@@ -72,6 +73,7 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            armMotor = hardwareMap.dcMotor.get("motorArm");
             //lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
             /*
             intakeServo = hardwareMap.crservo.get("intakeServo");
@@ -131,6 +133,10 @@ public class HolonomicDrive extends OpMode{
             /*boolean lifterUp = false;
             boolean lifterDown = false;
             */
+            boolean UpArrow = gamepad2.dpad_up;
+            boolean DownArrow = gamepad2.dpad_down;
+            boolean armup = false;
+            boolean armdown = false;
 
             //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
@@ -150,6 +156,8 @@ public class HolonomicDrive extends OpMode{
             if (LeftTrigger > 0.1) grabberExtend = true;
             if (RightBumper) grabberRelease = true;
             if (LeftBumper) grabberPinch = true;
+            if (UpArrow) armup = true;
+            if (DownArrow) armdown = true;
             if (grabberRetract && grabberExtend) // if both are pressed down deactive both of them
             {
                 grabberRetract = false;
@@ -159,6 +167,10 @@ public class HolonomicDrive extends OpMode{
             {
                 grabberRelease = false;
                 grabberPinch = false;
+            }
+            if (UpArrow && DownArrow) {
+                armup = false;
+                armdown= false;
             }
             /*
             If neither of the triggers are pressed down
