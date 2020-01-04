@@ -196,7 +196,10 @@ public class HolonomicDrive extends OpMode{
                 rightintake.setPower((0));
                 IntakeCRsErVo = true;
             }
-
+            if (IntakeCRServoin >= 0.1 && IntakeCRServoout >= 0.1) {
+                IntakeCRsErVo = false;
+                intakeCRServo = false;
+            }
             if (GrabingRight) GrabRight = true;
             if (GrabbingLeft) GrabLeft = true;
             if (GrabingRight && GrabbingLeft) {
