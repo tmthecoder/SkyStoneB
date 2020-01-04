@@ -6,9 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.*;
 
 
 @TeleOp(name = "Concept: HolonomicDrive", group = "Concept")
@@ -47,6 +49,10 @@ public class HolonomicDrive extends OpMode{
         public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
         public DcMotor armMotor;
+        public DcMotor flipperMotor;
+        public CRServo leftintake;
+        public CRServo rightintake;
+        public Servo GrabbingServo;
         //public DcMotor lifterMotor;
        // CRServo intakeServo;
         //Servo pincherServo;
@@ -60,7 +66,7 @@ public class HolonomicDrive extends OpMode{
         @Override
 
         public void init() {
-
+        telemetry.addData("Status", "Initialized");
 
             /*
              * Use the hardwareMap to get the dc motors and servos by name. Note
@@ -74,6 +80,10 @@ public class HolonomicDrive extends OpMode{
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
             armMotor = hardwareMap.dcMotor.get("motorArm");
+            flipperMotor = hardwareMap.dcMotor.get("MotorFlipper");
+            leftintake = hardwareMap.crservo.get ("IntakeLeft");
+            rightintake = hardwareMap.crservo.get("IntakeRight");
+            GrabbingServo = hardwareMap.servo.get("GrabServo");
             //lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
             /*
             intakeServo = hardwareMap.crservo.get("intakeServo");
@@ -88,7 +98,7 @@ public class HolonomicDrive extends OpMode{
             //motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
             //motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
             //motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-
+            //leftintake.setDirection(CRServo.Direction.REVERSE);
         }
 
         @Override
@@ -128,15 +138,30 @@ public class HolonomicDrive extends OpMode{
             boolean grabberExtend = false;
             boolean grabberRelease = false;
             boolean grabberPinch = false;
-
+            float IntakeCRServoin = gamepad1.right_trigger;
+            float IntakeCRServoout = gamepad1.left_trigger;
+            boolean intakeCRServo = false;
+            boolean IntakeCRsErVo = false;
+            boolean Leftarrow = gamepad2.dpad_left;
+            boolean Rightarrow = gamepad2.dpad_right;
+            boolean leftintakespin = false;
+            boolean rightintakespin = false;
            // Defining the booleans lifterUp and lifterDown
             /*boolean lifterUp = false;
             boolean lifterDown = false;
             */
             boolean UpArrow = gamepad2.dpad_up;
             boolean DownArrow = gamepad2.dpad_down;
+            boolean flippermoveleft = false;
+            boolean flippermoveright = false;
             boolean armup = false;
             boolean armdown = false;
+            boolean flipperleft = gamepad2.dpad_left;
+            boolean flipperright = gamepad2.dpad_right;
+            boolean GrabLeft = false;
+            boolean GrabRight = false;
+            boolean GrabingRight = gamepad2.y;
+            boolean GrabbingLeft = gamepad2.x;
 
             //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
@@ -152,12 +177,32 @@ public class HolonomicDrive extends OpMode{
             check if triggers are pressed, and if so,
             set grabberRetract or grabberExtend
              */
-            if (RightTrigger > 0.1) grabberRetract = true;
-            if (LeftTrigger > 0.1) grabberExtend = true;
-            if (RightBumper) grabberRelease = true;
-            if (LeftBumper) grabberPinch = true;
-            if (UpArrow) armup = true;
-            if (DownArrow) armdown = true;
+            if (UpArrow) {
+                armup = true;
+                armMotor.setPower(1);
+            }
+            if (DownArrow) {
+                armdown = true;
+                armMotor.setPower(0);
+            }
+            if (flipperright) flippermoveright = true;
+            if (IntakeCRServoin >= 0.1) {
+                leftintake.setPower(0);
+                rightintake.setPower(1);
+                intakeCRServo = true;
+            }
+            if (IntakeCRServoout >= 0.1) {
+                leftintake.setPower(1);
+                rightintake.setPower((0));
+                IntakeCRsErVo = true;
+            }
+
+            if (GrabingRight) GrabRight = true;
+            if (GrabbingLeft) GrabLeft = true;
+            if (GrabingRight && GrabbingLeft) {
+                GrabLeft = false;
+                GrabRight = false;
+            }
             if (grabberRetract && grabberExtend) // if both are pressed down deactive both of them
             {
                 grabberRetract = false;
@@ -178,7 +223,7 @@ public class HolonomicDrive extends OpMode{
              */
             if (!grabberRetract && !grabberExtend)
             {
-               // intakeServo.setPower(0.0);
+               //intakeServo.setPower(0.0);
             }
 
 
