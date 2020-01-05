@@ -106,10 +106,11 @@ public class HolonomicDrive extends OpMode{
 
 
             // left stick controls direction
-            // right stick X controls rotation
+            // right stick X controls rotation - DRIVER 1 CONTROLS - DRIVING ONLY
 
             float gamepad1LeftY = -gamepad1.left_stick_y;
             float gamepad1LeftX = gamepad1.left_stick_x;
+
             float gamepad1RightX = gamepad1.right_stick_x;
 
             // holonomic formulas
@@ -125,27 +126,31 @@ public class HolonomicDrive extends OpMode{
             BackLeft = Range.clip(BackLeft, -1, 1);
             BackRight = Range.clip(BackRight, -1, 1);
 
+            float IntakeCRServoin = gamepad1.right_trigger;
+            float IntakeCRServoout = gamepad1.left_trigger;
+
             /*
-            servo variable initialization
+            servo variable initialization - Driver 2 - ALL EXCEPT DRIVING
              */
             float RightTrigger = gamepad2.right_trigger;
             float LeftTrigger = gamepad2.left_trigger;
-            boolean RightBumper = gamepad2.right_bumper;
-            boolean LeftBumper = gamepad2.left_bumper;
-            boolean ButtonA = gamepad2.a;
-            boolean ButtonB = gamepad2.b;
-            boolean grabberRetract = false;
-            boolean grabberExtend = false;
-            boolean grabberRelease = false;
-            boolean grabberPinch = false;
-            float IntakeCRServoin = gamepad1.right_trigger;
-            float IntakeCRServoout = gamepad1.left_trigger;
+
             boolean intakeCRServo = false;
-            boolean IntakeCRsErVo = false;
+            boolean intakeCRSErvo1 = false;
             boolean Leftarrow = gamepad2.dpad_left;
             boolean Rightarrow = gamepad2.dpad_right;
             boolean leftintakespin = false;
             boolean rightintakespin = false;
+
+            /*boolean RightBumper = gamepad2.right_bumper;
+            boolean LeftBumper = gamepad2.left_bumper;
+            boolean ButtonA = gamepad2.a;
+            boolean ButtonB = gamepad2.b;
+            */
+            //boolean grabberRetract = false;
+            //boolean grabberExtend = false;
+            //boolean grabberRelease = false;
+            //boolean grabberPinch = false;
            // Defining the booleans lifterUp and lifterDown
             /*boolean lifterUp = false;
             boolean lifterDown = false;
@@ -179,11 +184,11 @@ public class HolonomicDrive extends OpMode{
              */
             if (UpArrow) {
                 armup = true;
-                armMotor.setPower(1);
+                armMotor.setPower(0.7);
             }
             if (DownArrow) {
                 armdown = true;
-                armMotor.setPower(0);
+                armMotor.setPower(0.2);
             }
             if (flipperright) flippermoveright = true;
             if (IntakeCRServoin >= 0.1) {
@@ -194,10 +199,10 @@ public class HolonomicDrive extends OpMode{
             if (IntakeCRServoout >= 0.1) {
                 leftintake.setPower(1);
                 rightintake.setPower((0));
-                IntakeCRsErVo = true;
+                intakeCRSErvo1 = true;
             }
             if (IntakeCRServoin >= 0.1 && IntakeCRServoout >= 0.1) {
-                IntakeCRsErVo = false;
+                intakeCRSErvo1 = false;
                 intakeCRServo = false;
             }
             if (GrabingRight) GrabRight = true;
