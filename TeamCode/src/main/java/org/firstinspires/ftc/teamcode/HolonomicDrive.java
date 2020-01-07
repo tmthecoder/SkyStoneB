@@ -48,15 +48,6 @@ public class HolonomicDrive extends OpMode{
         public DcMotor motorFrontLeft;
         public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
-        public DcMotor armMotor;
-        public DcMotor flipperMotor;
-        public CRServo leftintake;
-        public CRServo rightintake;
-        public Servo GrabbingServo;
-        //public DcMotor lifterMotor;
-       // CRServo intakeServo;
-        //Servo pincherServo;
-        //RevTouchSensor digitalTouch;
 
         /**
          * Constructor
@@ -79,17 +70,6 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
-            armMotor = hardwareMap.dcMotor.get("motorArm");
-            flipperMotor = hardwareMap.dcMotor.get("MotorFlipper");
-            leftintake = hardwareMap.crservo.get ("IntakeLeft");
-            rightintake = hardwareMap.crservo.get("IntakeRight");
-            GrabbingServo = hardwareMap.servo.get("GrabServo");
-            //lifterMotor = hardwareMap.dcMotor.get("lifterMotor");
-            /*
-            intakeServo = hardwareMap.crservo.get("intakeServo");
-            pincherServo = hardwareMap.servo.get("pincherServo");
-            digitalTouch = hardwareMap.get(RevTouchSensor.class, "digitalTouch");
-            */
 
 
             //These work without reversing (Tetrix motors).
@@ -125,174 +105,6 @@ public class HolonomicDrive extends OpMode{
             FrontLeft = Range.clip(FrontLeft, -1, 1);
             BackLeft = Range.clip(BackLeft, -1, 1);
             BackRight = Range.clip(BackRight, -1, 1);
-
-            float IntakeCRServoin = gamepad1.right_trigger;
-            float IntakeCRServoout = gamepad1.left_trigger;
-
-            /*
-            servo variable initialization - Driver 2 - ALL EXCEPT DRIVING
-             */
-            float RightTrigger = gamepad2.right_trigger;
-            float LeftTrigger = gamepad2.left_trigger;
-
-            boolean intakeCRServo = false;
-            boolean intakeCRSErvo1 = false;
-            boolean Leftarrow = gamepad2.dpad_left;
-            boolean Rightarrow = gamepad2.dpad_right;
-            boolean leftintakespin = false;
-            boolean rightintakespin = false;
-
-            /*boolean RightBumper = gamepad2.right_bumper;
-            boolean LeftBumper = gamepad2.left_bumper;
-            boolean ButtonA = gamepad2.a;
-            boolean ButtonB = gamepad2.b;
-            */
-            //boolean grabberRetract = false;
-            //boolean grabberExtend = false;
-            //boolean grabberRelease = false;
-            //boolean grabberPinch = false;
-           // Defining the booleans lifterUp and lifterDown
-            /*boolean lifterUp = false;
-            boolean lifterDown = false;
-            */
-            boolean UpArrow = gamepad2.dpad_up;
-            boolean DownArrow = gamepad2.dpad_down;
-            boolean flippermoveleft = false;
-            boolean flippermoveright = false;
-            boolean armup = false;
-            boolean armdown = false;
-            boolean flipperleft = gamepad2.dpad_left;
-            boolean flipperright = gamepad2.dpad_right;
-            boolean GrabLeft = false;
-            boolean GrabRight = false;
-            boolean GrabingRight = gamepad2.y;
-            boolean GrabbingLeft = gamepad2.x;
-
-            //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
-
-            /*
-            make sure variables are in bound
-             */
-            RightTrigger = Range.clip(RightTrigger, -1, 1);
-            LeftTrigger = Range.clip(LeftTrigger, -1, 1);
-
-
-
-            /*
-            check if triggers are pressed, and if so,
-            set grabberRetract or grabberExtend
-             */
-            if (UpArrow) {
-                armup = true;
-                armMotor.setPower(0.7);
-            }
-            if (DownArrow) {
-                armdown = true;
-                armMotor.setPower(0.2);
-            }
-            if (flipperright) flippermoveright = true;
-            if (IntakeCRServoin >= 0.1) {
-                leftintake.setPower(0);
-                rightintake.setPower(1);
-                intakeCRServo = true;
-            }
-            if (IntakeCRServoout >= 0.1) {
-                leftintake.setPower(1);
-                rightintake.setPower((0));
-                intakeCRSErvo1 = true;
-            }
-            if (IntakeCRServoin >= 0.1 && IntakeCRServoout >= 0.1) {
-                intakeCRSErvo1 = false;
-                intakeCRServo = false;
-            }
-            if (GrabingRight) GrabRight = true;
-            if (GrabbingLeft) GrabLeft = true;
-            if (GrabingRight && GrabbingLeft) {
-                GrabLeft = false;
-                GrabRight = false;
-            }
-            if (grabberRetract && grabberExtend) // if both are pressed down deactive both of them
-            {
-                grabberRetract = false;
-                grabberExtend = false;
-            }
-            if (grabberRelease && grabberPinch)
-            {
-                grabberRelease = false;
-                grabberPinch = false;
-            }
-            if (UpArrow && DownArrow) {
-                armup = false;
-                armdown= false;
-            }
-            /*
-            If neither of the triggers are pressed down
-            set the power to 0, stopping the servo
-             */
-            if (!grabberRetract && !grabberExtend)
-            {
-               //intakeServo.setPower(0.0);
-            }
-
-
-            /*
-            If the right trigger is pressed (grabberRetract),
-            then the servo should move with a power
-            factor of 1.
-             */
-            if (grabberRetract)
-            {
-                // intakeServo.setDirection(CRServo.Direction.FORWARD);
-                //intakeServo.setPower(1.0);
-            }
-
-            /*
-            If the left trigger is pressed (grabberExtend),
-            then the servo should move with a power
-            factor of -1.
-             */
-            if (grabberExtend)
-            {
-                // intakeServo.setDirection(CRServo.Direction.REVERSE);
-                //intakeServo.setPower(-1.0);
-            }
-            if (grabberRelease)
-            {
-                //pincherServo.setPosition(1);
-            }
-            if (grabberPinch)
-            {
-                //pincherServo.setPosition(0);
-            }
-           // if (digitalTouch.isPressed() && gamepad2.left_trigger > 0) {
-               // intakeServo.setPower(0.0);
-           // }
-           /* if (ButtonA) lifterUp = true;
-            if (ButtonB) lifterDown = true;
-            if (lifterDown && lifterUp) {
-                lifterDown = false;
-                lifterUp = false;
-            }
-
-            // LifterMotor Button A Button B if statements
-            if (lifterUp) {
-                lifterMotor.setPower(0.5);
-            }
-            if (lifterDown) {
-                lifterMotor.setPower(-0.5);
-            }
-
-            if (!lifterUp && !lifterDown)
-            {
-                lifterMotor.setPower(0.0);
-            }
-*/
-
-
-            /*telemetry.addData("SENSOR: ",
-                    //digitalTouch.isPressed()
-            );
-            */
 
            // telemetry.update();
             // write the values to the motors
