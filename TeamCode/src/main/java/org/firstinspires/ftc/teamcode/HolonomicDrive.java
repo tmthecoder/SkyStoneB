@@ -12,6 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.*;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 
 @TeleOp(name = "Concept: HolonomicDrive", group = "Concept")
 //@Disabled
@@ -116,21 +118,15 @@ public class HolonomicDrive extends OpMode{
 
 
 
-            /*
-             * Telemetry for debugging
-             */
-            /*
+
+             //Telemetry for debugging
             telemetry.addData("Text", "*** Robot Data***");
-            telemetry.addData("grabberRetract", grabberRetract);
-            telemetry.addData("grabberExtend", grabberExtend);
-            telemetry.addData("ServoPower", //intakeServo.getPower());
             telemetry.addData("Joy XL YL XR",  String.format("%.2f", gamepad1LeftX) + " " +
             String.format("%.2f", gamepad1LeftY) + " " +  String.format("%.2f", gamepad1RightX));
             telemetry.addData("f left pwr",  "front left  pwr: " + String.format("%.2f", FrontLeft));
             telemetry.addData("f right pwr", "front right pwr: " + String.format("%.2f", FrontRight));
             telemetry.addData("b right pwr", "back right pwr: " + String.format("%.2f", BackRight));
             telemetry.addData("b left pwr", "back left pwr: " + String.format("%.2f", BackLeft));
-            */
         }
 
         @Override
