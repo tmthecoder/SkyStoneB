@@ -48,6 +48,8 @@ public class HolonomicDrive extends OpMode{
         public DcMotor motorFrontLeft;
         public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
+        public DcMotor intakeleft;
+        public DcMotor intakeright;
 
         /**
          * Constructor
@@ -70,6 +72,8 @@ public class HolonomicDrive extends OpMode{
             motorFrontLeft = hardwareMap.dcMotor.get("frontLeftDrive");
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
+            intakeleft = hardwareMap.dcMotor.get("LeftIntake");
+            intakeright = hardwareMap.dcMotor.get("RightIntake");
 
 
             //These work without reversing (Tetrix motors).
@@ -92,6 +96,23 @@ public class HolonomicDrive extends OpMode{
             float gamepad1LeftX = gamepad1.left_stick_x;
 
             float gamepad1RightX = gamepad1.right_stick_x;
+
+            boolean LeftIntakeMotor = gamepad2.a;
+            boolean RightIntakeMotor = gamepad2.b;
+
+            // Not driving setpower
+
+            if (LeftIntakeMotor && RightIntakeMotor){
+                LeftIntakeMotor = false;
+                RightIntakeMotor = false;
+            }
+
+            else if (LeftIntakeMotor) {
+                intakeleft.setPower(1);
+            }
+            else if (RightIntakeMotor)
+                intakeright.setPower(1);
+
 
             // holonomic formulas
 
