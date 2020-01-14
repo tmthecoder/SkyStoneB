@@ -9,6 +9,7 @@ public class ServoGrabPlateTeleOp extends OpMode {
 
 
     public Servo TrayServo;
+    public Servo TrayServo2;
 
 
     @Override
@@ -17,21 +18,24 @@ public class ServoGrabPlateTeleOp extends OpMode {
     telemetry.addData("Status", "Initialized");
 
         TrayServo = hardwareMap.servo.get("ServoTray");
+        TrayServo2 = hardwareMap.servo.get("ServoTray2");
     }
 
     @Override
     public void loop() {
 
-        float TrayServoDown = gamepad1.left_trigger;
-        float TrayServoUp = gamepad1.right_trigger;
+        boolean TrayServoDown = gamepad1.a;
+        boolean TrayServoUp = gamepad1.b;
 
 
-        if (TrayServoDown > 0.1) {
+        if (TrayServoDown) {
            TrayServo.setPosition(1);
+           TrayServo2.setPosition(1);
         }
-        if (TrayServoUp > 0.1)
+        if (TrayServoUp)
             TrayServo.setPosition(0);
-        if (TrayServoDown > 0.1 && TrayServoUp > 0.1) {
+            TrayServo2.setPosition(0);
+        if (TrayServoDown && TrayServoUp) {
             TrayServo.setPosition(.5);
         }
     }

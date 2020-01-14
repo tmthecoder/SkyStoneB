@@ -92,6 +92,7 @@ public class ServostoGrabplate extends LinearOpMode {
         public DcMotor motorBackRight;
         public DcMotor motorBackLeft;
         public Servo TrayServo;
+        public Servo TrayServo2;
 
         @Override
         public void runOpMode() {
@@ -101,6 +102,7 @@ public class ServostoGrabplate extends LinearOpMode {
             motorBackLeft = hardwareMap.dcMotor.get("backLeftDrive");
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
             TrayServo = hardwareMap.servo.get("ServoTray");
+            TrayServo2 = hardwareMap.servo.get("ServoTray2");
 
 
 
@@ -150,6 +152,7 @@ public class ServostoGrabplate extends LinearOpMode {
 
 
             TrayServo.setPosition(1.6);
+            TrayServo2.setPosition(-1.6);
             telemetry.addData("Delay", "Time");
             try {
                 TimeUnit.SECONDS.sleep(3);
