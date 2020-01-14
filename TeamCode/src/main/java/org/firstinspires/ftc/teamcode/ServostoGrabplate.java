@@ -160,7 +160,16 @@ public class ServostoGrabplate extends LinearOpMode {
                 e.printStackTrace();
             }
 
-        encoderDrive(DRIVE_SPEED, 5,-5,5.0);
+        encoderDrive(DRIVE_SPEED, 15,-15,5.0);
+        TrayServo.setPosition(0);
+        TrayServo2.setPosition(0);
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        encoderDrive(DRIVE_SPEED, 0,8,5);
 
             //encoderDrive(DRIVE_SPEED,  -5,  5, 5.0);  // S1: Forward 5 Inches with 5 Sec timeout
             //encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
