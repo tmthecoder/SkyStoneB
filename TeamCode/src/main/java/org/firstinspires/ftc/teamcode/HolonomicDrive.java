@@ -21,7 +21,7 @@ public class HolonomicDrive extends OpMode{
 
     /**
      *
-     * Created by Akash and Rohan, FTC Team 11752, Tactical Terror
+     * Created by Akash and Rohan, FTC Team 17117, Tactical Terror
      * version 1.0 October-November 2019
      *
      */
@@ -97,22 +97,26 @@ public class HolonomicDrive extends OpMode{
 
             float gamepad1RightX = gamepad1.right_stick_x;
 
-            boolean LeftIntakeMotor = gamepad2.a;
-            boolean RightIntakeMotor = gamepad2.b;
+            float IntakeMotorin = gamepad2.left_trigger;
+            float IntakeMotorout = gamepad2.right_trigger;
 
             // Not driving setpower
 
-            if (LeftIntakeMotor && RightIntakeMotor){
-                LeftIntakeMotor = false;
-                RightIntakeMotor = false;
-            }
+            if (IntakeMotorin > 0.1 && IntakeMotorout > 0.1) {
+                intakeleft.setPower(0);
+                intakeright.setPower(0);
 
-            else if (LeftIntakeMotor) {
+            } else if (IntakeMotorin > 0.1) {
                 intakeleft.setPower(1);
-            }
-            else if (RightIntakeMotor)
+                intakeright.setPower(-1);
+            } else if (IntakeMotorout > 0.1) {
                 intakeright.setPower(1);
-
+            intakeleft.setPower(-1);
+        }
+            if (IntakeMotorin > 0 || IntakeMotorout > 0) {
+                intakeright.setPower(0);
+                intakeleft.setPower(0);
+            }
 
             // holonomic formulas
 
