@@ -50,6 +50,8 @@ public class HolonomicDrive extends OpMode{
         public DcMotor motorBackLeft;
         public DcMotor intakeleft;
         public DcMotor intakeright;
+        public DcMotor IntakeDropper1;
+        public  DcMotor IntakeDropper2;
 
         /**
          * Constructor
@@ -74,6 +76,8 @@ public class HolonomicDrive extends OpMode{
             motorBackRight = hardwareMap.dcMotor.get("backRightDrive");
             intakeleft = hardwareMap.dcMotor.get("LeftIntake");
             intakeright = hardwareMap.dcMotor.get("RightIntake");
+            IntakeDropper1 = hardwareMap.dcMotor.get("IntakeDrop1");
+            IntakeDropper2 = hardwareMap.dcMotor.get("IntakeDrop2");
 
 
             //These work without reversing (Tetrix motors).
@@ -99,6 +103,34 @@ public class HolonomicDrive extends OpMode{
 
             float IntakeMotorin = gamepad2.left_trigger;
             float IntakeMotorout = gamepad2.right_trigger;
+
+            // Motor Dropping
+             boolean IntakeDroppingdown = gamepad2.left_bumper;
+             boolean IntakeDropingup = gamepad2.right_bumper;
+
+             if (IntakeDroppingdown && IntakeDropingup) {
+                 IntakeDropper2.setPower(0);
+                 IntakeDropper1.setPower(0);
+             }
+
+             if (IntakeDroppingdown) {
+                 IntakeDropper2.setPower(-1);
+                 IntakeDropper1.setPower(1);
+             }
+
+             if (IntakeDropingup) {
+                 IntakeDropper2.setPower(1);
+                 IntakeDropper1.setPower(-1);
+             }
+
+             if (IntakeDropingup && IntakeDroppingdown) {
+                 telemetry.update();
+                 telemetry.addData("You", " can not press both at the same time");
+                 IntakeDropper1.setPower(0);
+                 IntakeDropper2.setPower(0);
+             }
+
+
 
             // Not driving setpower
 
