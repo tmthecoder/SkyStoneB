@@ -129,6 +129,14 @@ public class HolonomicDrive extends OpMode{
                  IntakeDropper1.setPower(0);
                  IntakeDropper2.setPower(0);
              }
+             if (IntakeDropingup == false) {
+                 IntakeDropper1.setPower(0);
+                 IntakeDropper2.setPower(0);
+             }
+             if (IntakeDroppingdown == false) {
+                 IntakeDropper2.setPower(0);
+                 IntakeDropper1.setPower(0);
+             }
 
 
 
