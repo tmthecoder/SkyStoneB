@@ -114,8 +114,8 @@ public class HolonomicDrive extends OpMode{
              }
 
              if (IntakeDroppingdown) {
-                 IntakeDropper2.setPower(.3);
-                 IntakeDropper1.setPower(.3);
+                 IntakeDropper2.setPower(.4);
+                 IntakeDropper1.setPower(-.4);
              }
 
              if (IntakeDropingup) {
