@@ -26,7 +26,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+/*
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -82,7 +82,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  * is explained below.
  */
 
-
+/*
 @TeleOp(name="Concept: SKYSTONE Vuforia Nav", group ="Concept")
 //@Disabled
 public class AnotherSkyStone extends LinearOpMode {
@@ -108,6 +108,7 @@ public class AnotherSkyStone extends LinearOpMode {
      * Once you've obtained a license key, copy the string from the Vuforia web site
      * and paste it in to your code on the next line, between the double quotes.
      */
+/*
     private static final String VUFORIA_KEY =
             "AZVLJev/////AAABmSmx3kdZgUFbkJtkqrPkWigu6y4UBWZl6IAIkZw3geYlmAMEhRXvAyQlHQLdfKRudq9Bjx6ViwRrdN/y5U6mzCkpcGn7r19kfZ3lrDGIJbt9Dmwi8CTFgVvO+j8NkFKwmclzYWduQLK1b3h2kUm/X8vCL5kdZcPqY+5A2J3oNcSYUcCCcVbGNYRkQ5cA7DfTTRRJIOYOkf/ygpmWSDesdM58lhtBP0eApSQmXb2STPXFx3FKfYry2LPKoTmz1EHSZR97BnTYlYiiVsFwkYYi8HMcI7d3PfgwQHf+XGStBC0eLEIXM4fyYPqj0PSoszZ123q4vm/Do8mNTpqn7pvWaPLbasz7AwBUkkt961zWS+RR";
 
@@ -144,6 +145,7 @@ public class AnotherSkyStone extends LinearOpMode {
          * We can pass Vuforia the handle to a camera preview resource (on the RC phone);
          * If no camera monitor is desired, use the parameter-less constructor instead (commented out below).
          */
+/*
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
@@ -185,8 +187,10 @@ public class AnotherSkyStone extends LinearOpMode {
         rear1.setName("Rear Perimeter 1");
         VuforiaTrackable rear2 = targetsSkyStone.get(12);
         rear2.setName("Rear Perimeter 2");
+*/
 
         // For convenience, gather together all the trackable objects in one easily-iterable collection */
+/*
         List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
         allTrackables.addAll(targetsSkyStone);
 
@@ -211,6 +215,7 @@ public class AnotherSkyStone extends LinearOpMode {
         // Set the position of the Stone Target.  Since it's not fixed in position, assume it's at the field origin.
         // Rotated it to to face forward, and raised it to sit on the ground correctly.
         // This can be used for generic target-centric approach algorithms
+/*
         stoneTarget.setLocation(OpenGLMatrix
                 .translation(0, 0, stoneZ)
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, -90)));
@@ -302,6 +307,7 @@ public class AnotherSkyStone extends LinearOpMode {
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, YZX, DEGREES, phoneYRotate, phoneZRotate, phoneXRotate));
 
         /**  Let all the trackable listeners know where the phone is.  */
+/*
         for (VuforiaTrackable trackable : allTrackables) {
             ((VuforiaTrackableDefaultListener) trackable.getListener()).setPhoneInformation(robotFromCamera, parameters.cameraDirection);
         }
@@ -354,8 +360,10 @@ public class AnotherSkyStone extends LinearOpMode {
             }
             telemetry.update();
         }
-
+/*
         // Disable Tracking when we are done;
         targetsSkyStone.deactivate();
     }
+
 }
+*/
