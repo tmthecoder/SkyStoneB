@@ -114,13 +114,13 @@ public class HolonomicDrive extends OpMode{
              }
 
              if (IntakeDroppingdown) {
-                 IntakeDropper2.setPower(-1);
-                 IntakeDropper1.setPower(1);
+                 IntakeDropper2.setPower(.3);
+                 IntakeDropper1.setPower(.3);
              }
 
              if (IntakeDropingup) {
-                 IntakeDropper2.setPower(1);
-                 IntakeDropper1.setPower(-1);
+                 IntakeDropper2.setPower(-.4);
+                 IntakeDropper1.setPower(.4);
              }
 
              if (IntakeDropingup && IntakeDroppingdown) {
@@ -130,11 +130,22 @@ public class HolonomicDrive extends OpMode{
                  IntakeDropper2.setPower(0);
              }
 
+             if (IntakeDropingup == false) {
+                 IntakeDropper1.setPower(0);
+                 IntakeDropper2.setPower(0);
+             }
+
+             if (IntakeDropingup && IntakeDroppingdown) {
+                 IntakeDropper2.setPower(0);
+                 IntakeDropper1.setPower(0);
+             }
+
 
 
             // Not driving setpower
 
             if (IntakeMotorin > 0.1 && IntakeMotorout > 0.1) {
+                intakeleft.setPower(0);
                 intakeleft.setPower(0);
                 intakeright.setPower(0);
 
