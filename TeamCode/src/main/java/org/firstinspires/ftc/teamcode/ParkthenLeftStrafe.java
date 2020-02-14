@@ -63,7 +63,7 @@ import java.lang.Thread;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Auto Drive By Encoder", group="Pushbot")
+@Autonomous(name="Automous: MovethenLeftStrafe", group="Automous")
 //@Disabled
 public class ParkthenLeftStrafe extends LinearOpMode {
 
@@ -133,7 +133,7 @@ public class ParkthenLeftStrafe extends LinearOpMode {
         /*
          */
         encoderDrive(DRIVE_SPEED,  5,  -5, 5.0);
-        encoderDrive(DRIVE_SPEED, 5, 0, 5.0);// S1: Forward 5 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, -15, 15, 5.0);
         //encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         //encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
         //Thread.sleep(15000);

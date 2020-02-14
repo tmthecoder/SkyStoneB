@@ -63,7 +63,7 @@ import java.lang.Thread;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Auto Drive By Encoder", group="Pushbot")
+@Autonomous(name="Automous: Auto Drive By Encoder", group="Automous")
 //@Disabled
 public class MyFIRSTJavaOpMode extends LinearOpMode {
 
