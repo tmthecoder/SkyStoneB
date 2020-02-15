@@ -226,7 +226,7 @@ public class ParkthenLeftStrafe extends LinearOpMode {
      *  2) Move runs out of time
      *  3) Driver stops the opmode running.
      */
-    public void encoderDrive(double speed,
+    public void encoderStrafe(double speed,
                              double leftInches, double rightInches,
                              double timeoutS) {
         int newfrontLeftTarget;
